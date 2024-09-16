@@ -1,7 +1,7 @@
 # COSC_484_Project
 
 Members
-- Jash Bhavsar,
+- Jash Bhavsar
 - Jeryle Assension
 - Erik Umoh
 - Joseph Oluwalade
