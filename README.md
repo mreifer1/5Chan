@@ -5,4 +5,4 @@ Members
 - Jeryle Assension
 - Erik Umoh
 - Joseph Oluwalade
-
+- Chris Ohiosikha
