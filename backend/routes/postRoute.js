@@ -9,16 +9,16 @@ router.post('/', async (request, response) => {
         if(
             !request.body.title ||
             !request.body.author ||
-            !request.body.date
+            !request.body.text
         ){
           return response.status(400).send({
-            message: 'Send all required fields: title, author, date',
+            message: 'Send all required fields: title, author, text',
           });  
         }
         const newPost = {
             title: request.body.title,
             author: request.body.author,
-            date: request.body.date,
+            text: request.body.text,
         };
 
         const Upost = await Userpost.create(newPost);

@@ -21,7 +21,6 @@ app.get('/', (request, response) =>{
 // handles all routes
 app.use('/posts', postRoute);
 
-
 mongoose
     .connect(mongoDBURL)
     .then(() => {

@@ -10,11 +10,14 @@ const postSchema = mongoose.Schema(
             type: String,
             require: true,
         },
-        date: {
-            type: Number,
-            required: true,
+        text: {
+            type: String,
+            required: String,
         },
 
+    },
+    {
+        timestamps: true,
     }
 );
 
