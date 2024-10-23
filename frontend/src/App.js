@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>5Chan</h1>
+      <h1 style={{display: 'flex', justifyContent: 'center'}}>5Chan</h1>
       <button onClick={handleCreatePost}>Create Post</button>
       <PostFormModal isOpen={isModalOpen} onClose={handleClosePost} addPost={addPost} />
       <PostList posts={posts} />
