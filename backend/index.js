@@ -1,13 +1,35 @@
 import express from "express";
-import { PORT } from "./config.js";
+import { mongoDBURL, PORT } from "./config.js";
+import mongoose from "mongoose";
+import { Userpost } from './models/postModel.js';
+import postRoute from './routes/postRoute.js';
+import cors from 'cors'; 
 
 const app = express();
 
-app.get('/', (request, responce) =>{
+// parses requests body
+app.use(express.json());
+
+// middleware for handling cors policy
+app.use(cors()); 
+
+app.get('/', (request, response) =>{
     console.log(request)
-    return responce.status(234).send('Server is working')
+    return response.status(234).send('Server is working')
 });
 
-app.listen(PORT, () => {
-    console.log(`App is listening to port: ${PORT}`);
-})
+// handles all routes
+app.use('/posts', postRoute);
+
+
+mongoose
+    .connect(mongoDBURL)
+    .then(() => {
+        console.log('App is connected to database')
+        app.listen(PORT, () => {
+            console.log(`App is listening to port: ${PORT}`);
+        })
+    })
+    .catch((error) => {
+        console.log(error);
+    });
