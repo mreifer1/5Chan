@@ -8,11 +8,11 @@ const postSchema = mongoose.Schema(
         },
         author: {
             type: String,
-            require: true,
+            required: false,
         },
         text: {
             type: String,
-            required: String,
+            required: true,
         },
 
     },
