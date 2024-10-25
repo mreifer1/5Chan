@@ -29,6 +29,17 @@ router.post('/', async (request, response) => {
     }
 } );
 
+// get posts
+router.get('/', async (req, res) => {
+    try {
+        const posts = await Userpost.find(); 
+        return res.status(200).send(posts); 
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send({ message: error.message });
+    }
+});
+
 // deleting a post
 router.delete('/:id', async(request, response) => {
     try{
