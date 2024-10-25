@@ -8,7 +8,6 @@ router.post('/', async (request, response) => {
     try{
         if(
             !request.body.title ||
-            !request.body.author ||
             !request.body.text
         ){
           return response.status(400).send({
@@ -17,7 +16,7 @@ router.post('/', async (request, response) => {
         }
         const newPost = {
             title: request.body.title,
-            author: request.body.author,
+            author: request.body.author || 'Anonymous',
             text: request.body.text,
         };
 
