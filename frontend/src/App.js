@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import PostFormModal from './createPostModal';
-import PostList from './postList';
+import PostFormModal from './components/createPostModal';
+import PostList from './components/postList';
 
 function App() {
   const [posts, setPosts] = useState([]);
