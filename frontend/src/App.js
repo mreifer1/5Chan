@@ -31,13 +31,13 @@ function App() {
         console.error('Error fetching posts:', error);
       }
     };
-    
+
     fetchPosts();
   }, []); // need [] to show empty dependency array so it runs once
 
   return (
     <div className="App">
-      <h1 className="text-4xl ml-auto mr-auto text-blue-400">5Chan</h1>
+      <h1 style={{display: 'flex', justifyContent: 'center', color: 'white'}}>5Chan</h1>
       <button onClick={handleCreatePost}>Create Post</button>
       <PostFormModal isOpen={isModalOpen} onClose={handleClosePost} addPost={addPost} />
       <PostList posts={posts} />
