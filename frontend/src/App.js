@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PostFormModal from './components/createPostModal';
-import PostList from './components/postList';
+import {createBrowserRouter, createRoutesFromElements, RouterProvider, Route} from 'react-router-dom';
+import About from './pages/About';
+import SignUp from './pages/SignUp';
+import Home from './pages/Home';
+import NoPage from './pages/NoPage';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -35,12 +39,22 @@ function App() {
     fetchPosts();
   }, []); // need [] to show empty dependency array so it runs once
 
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+    <Route>
+      <Route index element={<Home posts={posts} onCreatePost={handleCreatePost}/>}/>
+      <Route path='/home' element={<Home posts={posts} onCreatePost={handleCreatePost} />}/>
+      <Route path='/about' element={<About />}/>
+      <Route path='/signup' element={<SignUp />}/>
+      <Route path='*' element={<NoPage />}/>
+    </Route>
+    )
+  );
+    
   return (
     <div className="App">
-      <h1 style={{display: 'flex', justifyContent: 'center', color: 'white'}}>5Chan</h1>
-      <button onClick={handleCreatePost}>Create Post</button>
+      <RouterProvider router = {router} />;
       <PostFormModal isOpen={isModalOpen} onClose={handleClosePost} addPost={addPost} />
-      <PostList posts={posts} />
     </div>
   );
 }
