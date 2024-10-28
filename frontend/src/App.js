@@ -3,6 +3,7 @@ import PostFormModal from './components/createPostModal';
 import {createBrowserRouter, createRoutesFromElements, RouterProvider, Route} from 'react-router-dom';
 import About from './pages/About';
 import SignUp from './pages/SignUp';
+import LogIn from './pages/LogIn';
 import Home from './pages/Home';
 import NoPage from './pages/NoPage';
 
@@ -46,6 +47,7 @@ function App() {
       <Route path='/home' element={<Home posts={posts} onCreatePost={handleCreatePost} />}/>
       <Route path='/about' element={<About />}/>
       <Route path='/signup' element={<SignUp />}/>
+      <Route path='/login' element={<LogIn />}/>
       <Route path='*' element={<NoPage />}/>
     </Route>
     )

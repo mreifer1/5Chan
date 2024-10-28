@@ -13,6 +13,7 @@ const Navbar = ({ onCreatePost }) => {
         <CreatePostButton onClick={onCreatePost} />
         <button className="home-button" onClick={() => navigate('/home')}>Home</button>
         <button className="signup-button" onClick={() => navigate('/signup')}>Sign Up</button>
+        <button className="login-button" onClick={() => navigate('/login')}>Login</button>
         <button className="about-button" onClick={() => navigate('/about')}>About</button>
       </div>
     </div>
