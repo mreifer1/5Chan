@@ -52,7 +52,7 @@ function PostFormModal({ isOpen, onClose, addPost }) {
         <h2>Create Post</h2>
         {error && <div className="error">{error}</div>} {/* Display error message */}
         <form onSubmit={handleSubmit}>
-          <div class="title">
+          <div className="title">
           <input
             type='text'
             value={title}
@@ -61,7 +61,7 @@ function PostFormModal({ isOpen, onClose, addPost }) {
             required
           />
           </div>
-          <div class="author">
+          <div className="author">
           <input
             type='text'
             value={author}
@@ -69,7 +69,7 @@ function PostFormModal({ isOpen, onClose, addPost }) {
             placeholder='Enter author (optional)'
           />
           </div>
-          <div class ="text">
+          <div className ="text">
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
