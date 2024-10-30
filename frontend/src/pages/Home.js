@@ -7,7 +7,7 @@ const Home = ({ posts, onCreatePost, onDeletePost }) => {
     <div>
       <Navbar onCreatePost={onCreatePost}/>
       <div className='pageText'>
-        <h2>Home Page</h2>
+        <h2 className='homepage'>Home Page</h2>
       </div>
       <PostList posts={posts} onDeletePost={onDeletePost} />
     </div>

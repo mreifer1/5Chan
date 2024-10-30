@@ -77,8 +77,8 @@ function PostFormModal({ isOpen, onClose, addPost }) {
             required
           />
           </div>
-          <button type="submit">Post</button>
-          <button type="button" onClick={onClose}>Cancel</button>
+          <button type="submit" style={{gap: "10px"}}>Post</button>
+          <button type="button" style={{gap: "10px"}} onClick={onClose}>Cancel</button>
         </form>
       </div>
     </div>

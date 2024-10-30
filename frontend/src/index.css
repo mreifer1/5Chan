@@ -85,8 +85,12 @@
   }
   
   .navbar-title {
-    color: white;
-    font-size: 24px;
+    font-size: 40px;
+    background: linear-gradient(90deg, rgb(185, 96, 236) 0%, #4f46e5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    text-shadow: 0 0 20px #6d28d9; 
+    margin: 0;
     margin: 0; 
   }
   
@@ -100,7 +104,11 @@
   .navbar-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
+  }
+
+  .homepage {
+    
   }
 
   .delete-post-button,
