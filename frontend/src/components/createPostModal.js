@@ -4,6 +4,7 @@ function PostFormModal({ isOpen, onClose, addPost }) {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [text, setText] = useState('');
+  const [score, setScore] = useState('');
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
