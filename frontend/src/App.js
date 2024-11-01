@@ -38,6 +38,16 @@ function App() {
     }
   };
 
+  const addComment = async(postId, {text, author}) => {
+    const newComment = {text, author};
+
+    try{
+      //Backend Code
+    } catch(error) {
+      console.error('Error in adding comment: ', error);
+    }
+  }
+
  // on load fetches posts from backend (backend must be running)
   useEffect(() => {
     const fetchPosts = async () => {
@@ -59,7 +69,7 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
     <Route>
-      <Route index element={<Home posts={posts} onCreatePost={handleCreatePost} onDeletePost={handleDeletePost}/>}/>
+      <Route index element={<Home posts={posts} onCreatePost={handleCreatePost} onDeletePost={handleDeletePost} addComment={addComment}/>}/>
       <Route path='/home' element={<Home posts={posts} onCreatePost={handleCreatePost} onDeletePost={handleDeletePost}/>}/>
       <Route path='/about' element={<About />}/>
       <Route path='/signup' element={<SignUp />}/>
