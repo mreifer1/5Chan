@@ -38,10 +38,6 @@ function App() {
     }
   };
 
-  const handleUpvotePost = async (id) => {
-    // This will upvote posts. Reminder to ask Michael to explain.
-  }
-
  // on load fetches posts from backend (backend must be running)
   useEffect(() => {
     const fetchPosts = async () => {
