@@ -5,7 +5,7 @@ import PostComment from '../pages/Comment';
 function PostList({ posts, onDeletePost, addComment }) {
   return (
     <div className="postList">
-      <h2 style={{color: 'white'}}>Posts:</h2>
+      <h2 style={{color: 'white'}}> Recent Posts:</h2>
         {posts.map((post) => (
           <div key={post._id} className='postItem'>
             <div className ="inListPost">
