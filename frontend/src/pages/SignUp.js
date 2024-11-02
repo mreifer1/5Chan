@@ -15,14 +15,23 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted: ', formData);
+    const user = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password
+    };
+
     try{
-      // Backend
-      // Connection
-      // Goes
-      // Here
+      await fetch('http://localhost:5555/user', {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(user)
+      }).then(() => {
+        console.log('new user added')
+      })
     } catch(error) {
       console.error('Error: ', error);
       setError(error.message);

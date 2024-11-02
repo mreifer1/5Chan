@@ -3,6 +3,7 @@ import { mongoDBURL, PORT } from "./config.js";
 import mongoose from "mongoose";
 import { Userpost } from './models/postModel.js';
 import postRoute from './routes/postRoute.js';
+import userRoute from './routes/userRoute.js';
 import cors from 'cors'; 
 
 const app = express();
@@ -18,8 +19,10 @@ app.get('/', (request, response) =>{
     return response.status(234).send('Server is working')
 });
 
-// handles all routes
+// handles all routes for posts
 app.use('/posts', postRoute);
+// handles all routes for users
+app.use('/user', userRoute);
 
 mongoose
     .connect(mongoDBURL)
