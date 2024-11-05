@@ -14,6 +14,10 @@ const postSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+        vote: {
+            type: Number,
+            required: true
+        },
 
     },
     {
