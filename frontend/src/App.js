@@ -105,7 +105,7 @@ const handleDownvote = async (id) => {
     createRoutesFromElements(
     <Route>
       <Route index element={<Home posts={posts} onCreatePost={handleCreatePost} onDeletePost={handleDeletePost} addComment={addComment} onUpvote={handleUpvote} onDownvote={handleDownvote}/>}/>
-      <Route path='/home' element={<Home posts={posts} onCreatePost={handleCreatePost} onDeletePost={handleDeletePost}/>}/>
+      <Route path='/home' element={<Home posts={posts} onCreatePost={handleCreatePost} onDeletePost={handleDeletePost} addComment={addComment} onUpvote={handleUpvote} onDownvote={handleDownvote}/>}/>
       <Route path='/about' element={<About />}/>
       <Route path='/signup' element={<SignUp />}/>
       <Route path='/login' element={<LogIn />}/>

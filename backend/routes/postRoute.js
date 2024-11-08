@@ -1,5 +1,6 @@
 import express from 'express';
 import { Userpost } from '../models/postModel.js';
+import { Usercomment } from '../models/comment.js';
 
 const router = express.Router();
 
@@ -27,7 +28,29 @@ router.post('/', async (request, response) => {
         response.status(500).send({message: error.message});
     }
 } );
+// creates comment in data base 
+router.post('/comment', async (request, response) => {
+    try{
+        if(
+            !request.body.author ||
+            !request.body.text
+        ){
+          return response.status(400).send({
+            message: 'Send all required fields: title, author, text',
+          });  
+        }
+        const newComment = {
+            author: request.body.author || 'Anonymous',
+            text: request.body.text,
+        };
 
+        const createdComment = await Usercomment.create(newComment);
+        return response.status(201).send(createdComment); 
+    } catch (error){
+        console.log(error.message);
+        response.status(500).send({message: error.message});
+    }
+} ); 
 // get posts
 router.get('/', async (req, res) => {
     try {
