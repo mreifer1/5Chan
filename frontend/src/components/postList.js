@@ -2,7 +2,7 @@ import React from 'react';
 import DeletePost from '../pages/DeletePost';
 import PostComment from '../pages/Comment';
 
-function PostList({ posts, onDeletePost, addComment }) {
+function PostList({ posts, onDeletePost, addComment, onUpvote, onDownvote }) {
   return (
     <div className="postList">
       <h2 style={{color: 'white'}}> Recent Posts:</h2>
@@ -12,6 +12,11 @@ function PostList({ posts, onDeletePost, addComment }) {
             <h3 className='inPostTitle'>{post.title}</h3>
             <p className='inPostauthor'>Author: {post.author}</p>
             <p className='inPostText'>{post.text}</p>
+            
+            <p>Votes: {post.vote}</p>
+              <button onClick={() => onUpvote(post._id)}>Upvote</button>
+              <button onClick={() => onDownvote(post._id)}>Downvote</button>
+
             <DeletePost  id={post._id} onDelete={onDeletePost}/>
             <PostComment 
               postID={post._id}

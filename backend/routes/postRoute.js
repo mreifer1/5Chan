@@ -54,4 +54,36 @@ router.delete('/:id', async(request, response) => {
     }
 }); 
 
+// JASH Upvote a post
+router.patch('/:id/upvote', async (request, response) => {
+    try {
+        const { id } = request.params;
+        const updatedPost = await Userpost.findByIdAndUpdate(
+            id,
+            { $inc: { vote: 1 } },
+            { new: true }
+        );
+        response.status(200).send(updatedPost);
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
+
+// JASH Downvote a post
+router.patch('/:id/downvote', async (request, response) => {
+    try {
+        const { id } = request.params;
+        const updatedPost = await Userpost.findByIdAndUpdate(
+            id,
+            { $inc: { vote: -1 } },
+            { new: true }
+        );
+        response.status(200).send(updatedPost);
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
+
 export default router; 

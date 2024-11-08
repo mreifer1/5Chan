@@ -37,7 +37,42 @@ function App() {
       console.error('Error deleting post:', error);
     }
   };
-
+//UPVOTING and DOWNVOTING Features-----------------------------------------------------------------------------------------------------------------------------------------------------------
+//Upvoting Feature
+const handleUpvote = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:5555/posts/${id}/upvote`, {
+      method: 'PATCH',
+    });
+    if (!response.ok) {
+      throw new Error('Failed to upvote');
+    }
+    const updatedPost = await response.json();
+    setPosts((prevPosts) => 
+      prevPosts.map((post) => (post._id === id ? updatedPost : post))
+    );
+  } catch (error) {
+    console.error('Error upvoting post:', error);
+  }
+};
+//Downvoting Feature
+const handleDownvote = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:5555/posts/${id}/downvote`, {
+      method: 'PATCH',
+    });
+    if (!response.ok) {
+      throw new Error('Failed to downvote');
+    }
+    const updatedPost = await response.json();
+    setPosts((prevPosts) => 
+      prevPosts.map((post) => (post._id === id ? updatedPost : post))
+    );
+  } catch (error) {
+    console.error('Error downvoting post:', error);
+  }
+};
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
   const addComment = async(postId, {text, author}) => {
     const newComment = {text, author};
 
@@ -69,7 +104,7 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
     <Route>
-      <Route index element={<Home posts={posts} onCreatePost={handleCreatePost} onDeletePost={handleDeletePost} addComment={addComment}/>}/>
+      <Route index element={<Home posts={posts} onCreatePost={handleCreatePost} onDeletePost={handleDeletePost} addComment={addComment} onUpvote={handleUpvote} onDownvote={handleDownvote}/>}/>
       <Route path='/home' element={<Home posts={posts} onCreatePost={handleCreatePost} onDeletePost={handleDeletePost}/>}/>
       <Route path='/about' element={<About />}/>
       <Route path='/signup' element={<SignUp />}/>

@@ -16,7 +16,8 @@ const postSchema = mongoose.Schema(
         },
         vote: {
             type: Number,
-            required: true
+            required: true,
+            default: 0
         },
 
     },
