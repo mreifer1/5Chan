@@ -2,13 +2,13 @@ import React, {useState} from "react";
 
 function PostComment({comments, addComment}) {
     const [isCommentBoxVisible, setCommentBoxVisible] = useState(false);
-    const [commentText, setCommentText] = useState('');
+    const [text, setCommentText] = useState('');
     const [author, setAuthor] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (commentText.trim()) {
-            addComment({text: commentText, author});
+        if (text.trim()) {
+            addComment({text, author});
             setCommentText('');
             setAuthor('');
             setCommentBoxVisible(false);
@@ -28,7 +28,7 @@ function PostComment({comments, addComment}) {
                         placeholder="Enter author(optional)"
                     />
                     <textarea
-                        value={commentText}
+                        value={text}
                         onChange={(e) => setCommentText(e.target.value)}
                         placeholder="Enter your comment" required 
                     />
