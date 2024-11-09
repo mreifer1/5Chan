@@ -32,11 +32,10 @@ router.post('/', async (request, response) => {
 router.post('/comment', async (request, response) => {
     try{
         if(
-            !request.body.author ||
             !request.body.text
         ){
           return response.status(400).send({
-            message: 'Send all required fields: title, author, text',
+            message: 'Send all required fields: text',
           });  
         }
         const newComment = {
