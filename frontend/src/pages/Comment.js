@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function PostComment({postId, comments, addComment}) {
+function PostComment({comments, addComment}) {
     const [isCommentBoxVisible, setCommentBoxVisible] = useState(false);
     const [commentText, setCommentText] = useState('');
     const [author, setAuthor] = useState('');
@@ -8,7 +8,7 @@ function PostComment({postId, comments, addComment}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (commentText.trim()) {
-            addComment(postId, commentText);
+            addComment({text: commentText, author});
             setCommentText('');
             setAuthor('');
             setCommentBoxVisible(false);

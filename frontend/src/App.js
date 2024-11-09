@@ -73,15 +73,23 @@ const handleDownvote = async (id) => {
   }
 };
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-  const addComment = async(postId, {text, author}) => {
+  const addComment = async( {text, author} ) => {
     const newComment = {text, author};
 
     try{
-      //Backend Code
+        const response = await fetch('http://localhost:5555/posts/comment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newComment),
+    })
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to create comment');
+    }
     } catch(error) {
       console.error('Error in adding comment: ', error);
     }
-  }
+  };
 
  // on load fetches posts from backend (backend must be running)
   useEffect(() => {

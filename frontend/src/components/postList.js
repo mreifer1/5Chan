@@ -19,7 +19,6 @@ function PostList({ posts, onDeletePost, addComment, onUpvote, onDownvote }) {
 
             <DeletePost  id={post._id} onDelete={onDeletePost}/>
             <PostComment 
-              postID={post._id}
               comments = {post.comments}
               addComment = {addComment}/>
             </div>
