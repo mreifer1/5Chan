@@ -6,7 +6,7 @@ const SearchBar = ({ onSearch }) => {
   const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);
-    onSearch(value);  // Passes the query value back to the parent
+    onSearch(value);  // Passes the query value back to home 
   };
 
   return (
