@@ -23,7 +23,6 @@ app.get('/', (request, response) =>{
 app.use('/posts', postRoute);
 // handles all routes for users
 app.use('/user', userRoute);
-app.use('/user/login', userRoute);
 
 
 mongoose
