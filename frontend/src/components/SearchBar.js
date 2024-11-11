@@ -13,7 +13,7 @@ const SearchBar = ({ onSearch }) => {
     <div className="search-bar">
       <input
         type="text"
-        placeholder="Search post by title..."
+        placeholder="Search post by title or author...."
         value={query}
         onChange={handleInputChange}
       />

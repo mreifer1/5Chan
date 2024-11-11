@@ -12,7 +12,7 @@ const Home = ({ posts, onCreatePost, onDeletePost, addComment, onUpvote, onDownv
 
   // Filter posts based on the search query (so we can update post list)
   const filteredPosts = posts.filter((post) => {
-    return post.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return post.title.toLowerCase().includes(searchQuery.toLowerCase()) || post.author.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
   return (
