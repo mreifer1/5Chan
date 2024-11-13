@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar/Navbar";
 import React, {useState} from 'react'
-import './SignUp.css';
+import '../pages/SignUp/SignUp.css';
 
 const LogIn = () => {
         const[formData, setFromData] = useState({

@@ -1,0 +1,72 @@
+/*CSS for SignUp Page*/
+.SignUpPage {
+    background-color: #1a1a1a; /* Matches dark theme of the site */
+    padding: 30px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow*/
+    text-align: center;
+    color: #e0e0e0; /* Light text */
+    border: 2px solid #6d28d9; /* Purple border*/
+  }
+  
+  .SignUpPage h2 {
+    font-size: 2.5rem;
+    color: #a78bfa;
+    margin-bottom: 20px;
+  }
+  
+  .SignUpPage form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .SignUpPage input {
+    width: 90%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #6d28d9; /* Purple border on inputs */
+    border-radius: 5px;
+    background-color: #2a2a2a; 
+    color: #e0e0e0; 
+  }
+  
+  .SignUpPage input::placeholder {
+    color: #b3b3b3; 
+    font-family: "Times New Roman", Times, serif;
+  }
+  
+  .SignUpPage button {
+    background-color: #6d28d9; /* Purple button background */
+    color: white;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .SignUpPage button:hover {
+    background-color: #5b21b6; /* Darker purple on hover */
+  }
+  
+  .SignUpPage p {
+    font-size: 1rem;
+    color: #ff4d4d; /*error messages */
+  }
+  
+  @media (max-width: 600px) {
+    .SignUpPage {
+      width: 95%;
+      padding: 20px;
+    }
+  
+    .SignUpPage h2 {
+      font-size: 2rem;
+    }
+  }

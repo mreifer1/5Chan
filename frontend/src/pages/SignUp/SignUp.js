@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import React, {useState} from 'react'
 import './SignUp.css';
 
@@ -41,17 +41,17 @@ const SignUp = () => {
   return (
     <div>
         <Navbar />
-        <div className='pageText'>
+        <div className='SignUpPage'>
             <h2>Sign Up Page</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="username">Username: </label>
-                <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required/><br></br>
+                <input type="text" id="username" name="username" placeholder="Enter Username" value={formData.username} onChange={handleChange} required/><br></br>
                 <label htmlFor="email">E-mail: </label>
-                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required/><br></br>
+                <input type="email" id="email" name="email" placeholder="Enter Email" value={formData.email} onChange={handleChange} required/><br></br>
                 <label htmlFor="password">Password: </label>
-                <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required/><br></br>
+                <input type="password" id="password" name="password" placeholder="Enter Password" value={formData.password} onChange={handleChange} required/><br></br>
                 <button type="submit">Sign up</button>
               </div>
             </form>
