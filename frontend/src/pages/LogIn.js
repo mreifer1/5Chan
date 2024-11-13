@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import React, {useState} from 'react'
 import './SignUp.css';
 
@@ -30,7 +30,7 @@ const LogIn = () => {
               headers: {"Content-Type": "application/json"},
               body: JSON.stringify(user)
             }).then(() => {
-              if (Response.status == 200){
+              if (Response.status === 200){
                 console.log("Login Successful");
               }
               else{

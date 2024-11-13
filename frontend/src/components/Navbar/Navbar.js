@@ -1,6 +1,7 @@
 import React from 'react';
-import CreatePostButton from './CreatePostButton'; 
+import CreatePostButton from '../CreatePostButton'; 
 import { useNavigate } from 'react-router-dom';
+import './Navbar.css';
 
 const Navbar = ({ onCreatePost }) => {
   const navigate = useNavigate();

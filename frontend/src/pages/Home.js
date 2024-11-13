@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PostList from '../components/postList';
-import Navbar from '../components/Navbar';
-import SearchBar from '../components/SearchBar';
+import Navbar from '../components/Navbar/Navbar';
+import SearchBar from '../components/SearchBar/SearchBar';
 
 const Home = ({ posts, onCreatePost, onDeletePost, addComment, onUpvote, onDownvote }) => {
   const [searchQuery, setSearchQuery] = useState('');
