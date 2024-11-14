@@ -3,7 +3,7 @@ import PostFormModal from './components/createPostModal';
 import {createBrowserRouter, createRoutesFromElements, RouterProvider, Route} from 'react-router-dom';
 import About from './pages/About/About';
 import SignUp from './pages/SignUp/SignUp';
-import LogIn from './pages/LogIn';
+import LogIn from './pages/LogIn/LogIn';
 import Home from './pages/Home';
 import NoPage from './pages/NoPage';
 
