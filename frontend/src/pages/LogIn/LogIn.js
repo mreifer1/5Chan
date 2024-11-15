@@ -1,47 +1,55 @@
 import Navbar from "../../components/Navbar/Navbar";
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import './LogIn.css';
 
 const LogIn = () => {
-        const[formData, setFromData] = useState({
-          username: '', email: '', password:''
+  const navigate = useNavigate();
+
+    const[formData, setFromData] = useState({
+      username: '', email: '', password:''
+    });
+    const [error, setError] = useState(null);
+  
+    const handleChange = (e) => {
+      setFromData({
+        ...formData,
+        [e.target.name]: e.target.value
+      });
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log('Login form submitted: ', formData);
+      const user = {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password
+      };
+  
+      try{
+        const response = await fetch('http://localhost:5555/user/login', {
+          method: 'POST',
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(user),
         });
-        const [error, setError] = useState(null);
-      
-        const handleChange = (e) => {
-          setFromData({
-            ...formData,
-            [e.target.name]: e.target.value
-          });
-        };
-      
-        const handleSubmit = async (e) => {
-          e.preventDefault();
-          console.log('Login form submitted: ', formData);
-          const user = {
-            username: formData.username,
-            email: formData.email,
-            password: formData.password
-          };
-      
-          try{
-            await fetch('http://localhost:5555/user/login', {
-              method: 'POST',
-              headers: {"Content-Type": "application/json"},
-              body: JSON.stringify(user)
-            }).then(() => {
-              if (Response.status === 200){
-                console.log("Login Successful");
-              }
-              else{
-                console.log("Login Failed");
-            }
-            })
-          } catch(error) {
-            console.error('Error: ', error);
-            setError(error.message);
-          }
+
+        if (response.status === 200){
+          console.log("Login Successful");
+          alert("Login Successful");
+          //I guess token stuff goes here?
+          //I also want to make it so that if someone is logged in, the 
+          navigate('/home');
         }
+        else{
+          console.log("Login Failed");
+          alert("Login Failed");
+        }
+      } catch(error) {
+        console.error('Error: ', error);
+        setError(error.message);
+      }
+    }
     return (
         <div>
             <Navbar />

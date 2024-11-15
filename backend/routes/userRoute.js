@@ -36,15 +36,13 @@ router.post('/login', async (request, response) => {
     const reqEmail = request.body.email;
     try{
             //Checks to see if submitted username exists
-        const searchedUser = await user.find({username : reqUser});
+        const searchedUser = await user.find({username : reqUser, password : reqPass, email : reqEmail});
         console.log("You searched for: " + searchedUser);
         if (searchedUser != ""){ 
-            //Check if the username in DB that matched with the form also has the same email/password
-            //(Ask how to retrieve fields from a json because I can't get it to work)
             return response.status(200).send({message: "Login Sucessful"});
         } else{
             return response.status(400).send({
-                message: 'Account doesnt exist.',
+                message: 'Username, Password, or Email is invalid',
               });
         }
 
