@@ -1,8 +1,10 @@
 import Navbar from "../../components/Navbar/Navbar";
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const[formData, setFromData] = useState({
     username: '', email: '', password:''
   });
@@ -31,6 +33,8 @@ const SignUp = () => {
         body: JSON.stringify(user)
       }).then(() => {
         console.log('new user added')
+        alert('Account created. (Being Redirected to Login)')
+        navigate('/login');
       })
     } catch(error) {
       console.error('Error: ', error);

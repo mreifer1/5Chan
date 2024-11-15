@@ -10,6 +10,15 @@ import NoPage from './pages/NoPage';
 function App() {
   const [posts, setPosts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [user, setUser] = useState({ username: '', _id: '' });
+
+  const handleLogin = (userInfo) => {
+    setUser({ 
+      username: userInfo.username, 
+      _id: userInfo._id 
+    });
+  };
+  
 
   const addPost = (post) => {
     setPosts((prevPosts) => [post, ...prevPosts]);

@@ -38,7 +38,7 @@ router.post('/login', async (request, response) => {
             //Checks to see if submitted username exists
         const searchedUser = await user.find({username : reqUser, password : reqPass, email : reqEmail});
         console.log("You searched for: " + searchedUser);
-        if (searchedUser != ""){ 
+        if (searchedUser.length > 0){ 
             return response.status(200).send({message: "Login Sucessful"});
         } else{
             return response.status(400).send({

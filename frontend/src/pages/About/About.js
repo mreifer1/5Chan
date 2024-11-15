@@ -1,10 +1,10 @@
 import Navbar from "../../components/Navbar/Navbar";
 import React from 'react'
 import './About.css'
-const About = ( {onCreatePost}) => {
+const About = () => {
   return (
     <div>
-        <Navbar onCreatePost={onCreatePost}/>
+        <Navbar />
         <div className='aboutPage'>
             <h2>About 5Chan</h2>
             <p>Welcome to 5chan, a unique blend of two popular platforms, 4chan and Reddit. Our site provides a space for users to create and engage with posts in a completely anonymous environment. Inspired by the open and unfiltered style of 4chan and the voting-based community model of Reddit, 5chan gives users the freedom to share ideas, stories, and discussions with complete privacy.</p>
