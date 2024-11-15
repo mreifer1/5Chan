@@ -12,7 +12,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const addPost = (post) => {
-    setPosts((prevPosts) => [post, ...prevPosts]);
+    setPosts((prevPosts) => [...prevPosts, post]);
   };
 
   const handleCreatePost = () =>{
