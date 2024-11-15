@@ -8,7 +8,10 @@ const Navbar = ({ onCreatePost }) => {
 
   return (
     <div className="navbar">
+      <div className="navbar-logo">
+        <img src={"/smallLogo.png"} alt="5Chan logo" />
       <h1 className="navbar-title">5Chan</h1>
+      </div>
       <hr className="navbar-divider" />
       <div className="navbar-buttons">
         <CreatePostButton onClick={onCreatePost} />
