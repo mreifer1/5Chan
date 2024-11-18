@@ -1,10 +1,13 @@
 import express from "express";
-import { mongoDBURL, PORT } from "./config.js";
+import { PORT } from "./config.js";
 import mongoose from "mongoose";
 import { Userpost } from './models/postModel.js';
 import postRoute from './routes/postRoute.js';
 import userRoute from './routes/userRoute.js';
 import cors from 'cors'; 
+import * as dotenv from "dotenv"
+
+dotenv.config(); 
 
 const app = express();
 
@@ -28,7 +31,7 @@ app.use('/user', userRoute);
 
 
 mongoose
-    .connect(mongoDBURL)
+    .connect(process.env.URI)
     .then(() => {
         console.log('App is connected to database')
         app.listen(PORT, () => {
