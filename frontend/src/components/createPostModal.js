@@ -5,18 +5,26 @@ function PostFormModal({ isOpen, onClose, addPost }) {
   const [author, setAuthor] = useState('');
   const [text, setText] = useState('');
   const [error, setError] = useState(null);
+  const [file, setFile] = useState(null); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (title.trim() && text.trim()) {
-      const post = { title, author, text };
+      const formData = new FormData(); 
+      formData.append('title', title);      
+      formData.append('author', author || 'Anonymous'); 
+      formData.append('text', text);        
+
+    if (file) {
+      formData.append('file', file);
+    }
+
       //post to backend and saved in mongo (backend must be running)
        try {
          const response = await fetch('http://localhost:5555/posts', {
            method: 'POST',
-           headers: { 'Content-Type': 'application/json' },
-           body: JSON.stringify(post),
+           body: formData,
          });
 
          if (!response.ok) {
@@ -29,6 +37,7 @@ function PostFormModal({ isOpen, onClose, addPost }) {
          setTitle('');
          setAuthor('');
          setText('');
+         setFile(null);
          setError(null);
          onClose();
        } catch (error) {
@@ -76,6 +85,14 @@ function PostFormModal({ isOpen, onClose, addPost }) {
             placeholder='Enter text'
             required
           />
+          <div>
+          <input
+            type="file"
+            accept="image/*"  
+            onChange={(e) => setFile(e.target.files[0])} 
+          />
+          </div>
+          <br></br>
           </div>
           <div style={{display: 'flex', gap: '10px'}}>
           <button type="submit">Post</button>

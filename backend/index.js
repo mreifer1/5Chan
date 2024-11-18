@@ -14,6 +14,8 @@ app.use(express.json());
 // middleware for handling cors policy
 app.use(cors()); 
 
+app.use(express.static('public'));
+
 app.get('/', (request, response) =>{
     console.log(request)
     return response.status(234).send('Server is working')
