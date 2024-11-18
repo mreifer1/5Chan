@@ -1,5 +1,4 @@
 import express from "express";
-import { PORT } from "./config.js";
 import mongoose from "mongoose";
 import { Userpost } from './models/postModel.js';
 import postRoute from './routes/postRoute.js';
@@ -34,8 +33,8 @@ mongoose
     .connect(process.env.URI)
     .then(() => {
         console.log('App is connected to database')
-        app.listen(PORT, () => {
-            console.log(`App is listening to port: ${PORT}`);
+        app.listen(process.env.PORT, () => {
+            console.log(`App is listening to port: ${process.env.PORT}`);
         })
     })
     .catch((error) => {
