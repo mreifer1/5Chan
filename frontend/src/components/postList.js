@@ -18,7 +18,7 @@ function PostList({ posts, onDeletePost, addComment, onUpvote, onDownvote }) {
               <img
                 src={`http://localhost:5555/${post.image}`}
                 alt=''
-                style={{ width: '100%', height: 'auto' }}
+                style={{ width: '10%', height: 'auto' }}
               />
             )}
             
