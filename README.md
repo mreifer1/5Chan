@@ -1,6 +1,7 @@
 # COSC_484_Project
 
 Members
+- Michael Reifer
 - Jash Bhavsar
 - Jeryle Assension
 - Erik Umoh
