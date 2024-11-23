@@ -1,5 +1,6 @@
 import express from 'express';
 import { user } from '../models/user.js';
+import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
@@ -15,10 +16,14 @@ router.post('/', async (request, response) => {
             message: 'Send all required fields: email, password, username',
           });  
         }
+
+        //Encrypt Password
+        const hashedPassword = await bcrypt.hash(request.body.password, 10);
+
         const newUser = {
             email: request.body.email,
             username: request.body.username,
-            password: request.body.password,
+            password: hashedPassword,
         };
 
         const User = await user.create(newUser);
@@ -36,22 +41,26 @@ router.post('/login', async (request, response) => {
     const reqEmail = request.body.email;
     try{
             //Checks to see if submitted username exists
-        const searchedUser = await user.find({username : reqUser, password : reqPass, email : reqEmail});
+        const searchedUser = await user.findOne({username : reqUser, email : reqEmail});
         console.log("You searched for: " + searchedUser);
-        if (searchedUser.length > 0){ 
+        if (searchedUser == null){
+            return response.status(400).send({
+                message: "User doesn't exist or email is wrong",
+              });
+        }
+
+            //Decrypt Password
+        if (bcrypt.compare(reqPass, searchedUser.password)){
             return response.status(200).send({message: "Login Sucessful"});
         } else{
             return response.status(400).send({
                 message: 'Username, Password, or Email is invalid',
-              });
+                });
         }
-
     } catch(error){
         console.log(error.message);
         response.status(500).send({message: error.message});
     }
-
-    
 })
 
 // deleting a user

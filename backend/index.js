@@ -4,7 +4,7 @@ import { Userpost } from './models/postModel.js';
 import postRoute from './routes/postRoute.js';
 import userRoute from './routes/userRoute.js';
 import cors from 'cors'; 
-import * as dotenv from "dotenv"
+import * as dotenv from "dotenv";
 
 dotenv.config(); 
 
