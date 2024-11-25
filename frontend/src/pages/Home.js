@@ -135,7 +135,7 @@ const Home = () => {
         onDownvote={handleDownvote}
       />
 
-      {isModalOpen && <PostFormModal onClose={handleClosePost} onAddPost={addPost} />}
+      <PostFormModal  isOpen={isModalOpen} onClose={handleClosePost} addPost={addPost} />
     </div>
   );
 };
