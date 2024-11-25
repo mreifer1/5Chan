@@ -4,7 +4,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { Userpost } from '../models/postModel.js';
-import { Usercomment } from '../models/comment.js';
 
 const __filename = fileURLToPath(import.meta.url); // converts file:///backend/routes/postRoute.js to -> just the path like /backend/routes/postRoute.js
 const __dirname = dirname(__filename); // returns /backend/routes
@@ -47,20 +46,27 @@ router.post('/', upload.single('file'), async (request, response) => {
 });
 
 // POST route to create a comment
-router.post('/comment', async (request, response) => {
+router.post('/:postId/comment', async (request, response) => {
   try {
-    if (!request.body.text) {
+    const { postId } = request.params; // Extract postId from request.params
+    const { text, author } = request.body;
+
+    if (!text) {
       return response.status(400).send({
         message: 'Send all required fields: text',
       });
     }
-    const newComment = {
-      author: request.body.author || 'Anonymous',
-      text: request.body.text,
-    };
 
-    const createdComment = await Usercomment.create(newComment);
-    return response.status(201).send(createdComment);
+    const post = await Userpost.findById(postId);
+    if (!post) {
+      return response.status(404).send({ message: 'Post not found' });
+    }
+
+    const newComment = { text, author: author || 'Anonymous' };
+    post.comments.push(newComment);
+    await post.save();
+
+    return response.status(201).send(post); // Return the updated post
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });

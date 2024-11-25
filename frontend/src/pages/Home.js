@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import PostList from '../components/postList';
 import Navbar from '../components/Navbar/Navbar';
 import SearchBar from '../components/SearchBar/SearchBar';
+import PostList from '../components/postList';
 import PostFormModal from '../components/createPostModal';
 
 const Home = () => {
@@ -25,7 +25,7 @@ const Home = () => {
     };
 
     fetchPosts();
-  }, []);
+  }, [])
 
   // Handle search input change
   const handleSearch = (query) => {
@@ -37,17 +37,28 @@ const Home = () => {
     setPosts((prevPosts) => [post, ...prevPosts]);
   };
 
-  // Delete post
-  const handleDeletePost = async (id) => {
-    const url = `http://localhost:5555/posts/${id}`;
+  // Add comment to a post
+  const addComment = async (postId, { text, author }) => {
+    const newComment = { text, author };
+
     try {
-      const response = await fetch(url, { method: 'DELETE' });
+      const response = await fetch(`http://localhost:5555/posts/${postId}/comment`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newComment),
+      });
+
       if (!response.ok) {
-        throw new Error('Failed to delete post');
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to create comment');
       }
-      setPosts(posts.filter((post) => post._id !== id));
+
+      const updatedPost = await response.json();
+      setPosts((prevPosts) =>
+        prevPosts.map((post) => (post._id === postId ? updatedPost : post))
+      );
     } catch (error) {
-      console.error('Error deleting post:', error);
+      console.error('Error in adding comment:', error);
     }
   };
 
@@ -79,13 +90,18 @@ const Home = () => {
     }
   };
 
-  // Filter posts based on the search query
-  const filteredPosts = posts.filter((post) => {
-    return (
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.author.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  });
+  // Delete post
+  const handleDeletePost = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5555/posts/${id}`, { method: 'DELETE' });
+      if (!response.ok) {
+        throw new Error('Failed to delete post');
+      }
+      setPosts((prevPosts) => prevPosts.filter((post) => post._id !== id));
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
 
   const handleCreatePost = () => {
     setIsModalOpen(true);
@@ -94,6 +110,13 @@ const Home = () => {
   const handleClosePost = () => {
     setIsModalOpen(false);
   };
+
+  const filteredPosts = posts.filter((post) => {
+    return (
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.author.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
 
   return (
     <div>
@@ -107,11 +130,12 @@ const Home = () => {
       <PostList
         posts={filteredPosts}
         onDeletePost={handleDeletePost}
+        addComment={addComment}
         onUpvote={handleUpvote}
         onDownvote={handleDownvote}
       />
 
-      <PostFormModal isOpen={isModalOpen} onClose={handleClosePost} addPost={addPost} />
+      {isModalOpen && <PostFormModal onClose={handleClosePost} onAddPost={addPost} />}
     </div>
   );
 };

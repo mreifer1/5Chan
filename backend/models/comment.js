@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const postSchema = mongoose.Schema(
+const commentSchema = mongoose.Schema(
     {
         author: {
             type: String,
@@ -17,4 +17,4 @@ const postSchema = mongoose.Schema(
 );
 
 
-export const Usercomment = mongoose.model('Usercomment', postSchema);
+export { commentSchema }
