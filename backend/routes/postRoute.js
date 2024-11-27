@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { Userpost } from '../models/postModel.js';
+import { authenticateToken } from '../routes/userRoute.js'
 
 const __filename = fileURLToPath(import.meta.url); // converts file:///backend/routes/postRoute.js to -> just the path like /backend/routes/postRoute.js
 const __dirname = dirname(__filename); // returns /backend/routes
@@ -21,8 +22,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+  //Testing User Authentication Tokens
+// router.get('/', authenticateToken, (req, res) => {
+//   //return res.json();
+// })
+
 // POST route to create a new post
-router.post('/', upload.single('file'), async (request, response) => {
+router.post('/',upload.single('file'), async (request, response) => {
   try {
     if (!request.body.title || !request.body.text) {
       return response.status(400).send({

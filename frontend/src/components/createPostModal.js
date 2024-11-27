@@ -20,6 +20,20 @@ function PostFormModal({ isOpen, onClose, addPost }) {
       formData.append('file', file);
     }
 
+      //Confirm Login Status (Test) Commented Out because it breaks the rest of this code. Working on fix
+      // const token = localStorage.getItem("accessToken");
+      // if (token != null){
+      //   try{
+      //     const response = await fetch('http://localhost:5555/posts', {
+      //       method: 'GET',
+      //       headers: {'Authorization': `Bearer ${token}`}
+      //     });
+      //   }catch{
+      //     //console.error('Error: ', error);
+      //     //setError(error.message);
+      //   }
+      // }
+
       //post to backend and saved in mongo (backend must be running)
        try {
          const response = await fetch('http://localhost:5555/posts', {
