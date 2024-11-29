@@ -1,13 +1,7 @@
 import express from 'express';
 import multer from 'multer';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import { Userpost } from '../models/postModel.js';
 import { authenticateToken } from '../routes/userRoute.js'
-
-const __filename = fileURLToPath(import.meta.url); // converts file:///backend/routes/postRoute.js to -> just the path like /backend/routes/postRoute.js
-const __dirname = dirname(__filename); // returns /backend/routes
 
 const router = express.Router();
 
