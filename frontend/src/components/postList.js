@@ -14,8 +14,8 @@ function PostList({ posts, onDeletePost, addComment, onUpvote, onDownvote }) {
 
             {post.image && (
               <img
-                src={`http://localhost:5555/${post.image}`}
-                alt="5Chan Posts"
+                src={`http://localhost:5555/posts/${post._id}/image`}
+                alt={post.image.originalName || '5Chan Post'}
                 style={{ width: '10%', height: 'auto' }}
               />
             )}
