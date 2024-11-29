@@ -1,0 +1,77 @@
+.DisplayPosts{
+  display: flex;
+  flex-direction: column; /* Stack posts vertically */
+  align-items: center; /* Center content horizontally */
+}
+.postList {
+  margin: 0 auto; /* Center horizontally */
+  margin-top: 20px; /* Add space below the search bar */
+  padding: 20px;
+  width: 90%; /* Adjust width for responsiveness */
+  max-width: 800px; /* Limit maximum width */
+
+}
+
+.postItem {
+  margin-bottom: 20px; /* Space between posts */
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Adds depth */
+  border: 1px solid #6d28d9; /* Purple border for theme */
+  color: #e0e0e0;
+  width: 100%; /* Make posts take the full width of the container */
+}
+
+.postContent {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.postActions {
+  display: flex;
+  justify-content: space-between; /* Separate voting and action buttons */
+  align-items: center;
+  margin-top: 10px;
+}
+
+.postActions .voteButtons {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between upvote and downvote */
+}
+
+.voteButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #a78bfa; /* Purple for icons */
+  transition: transform 0.3s ease;
+}
+
+.voteButton.upvote {
+  color: #4caf50; /* Green for upvote */
+}
+
+.voteButton.downvote {
+  color: #f44336; /* Red for downvote */
+}
+
+.voteButton:hover {
+  transform: scale(1.1); /* Slight enlargement on hover */
+}
+
+.postActions .DeleteButton {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #b3b3b3; /* gray delete button*/
+  cursor: pointer;
+}
+
+.postActions .DeleteButton span:hover {
+  color: white; /* Highlight on hover */
+}

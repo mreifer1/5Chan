@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import SearchBar from '../components/SearchBar/SearchBar';
-import PostList from '../components/postList';
+import PostList from '../components/postList/postList';
 import PostFormModal from '../components/createPostModal';
 
 const Home = () => {
