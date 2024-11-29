@@ -11,16 +11,8 @@ const __dirname = dirname(__filename); // returns /backend/routes
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../public/images'));  // Store files in public/images
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));  // Unique file name should never be duplicates
-  }
-});
-
-const upload = multer({ storage: storage });
+const storage = multer.memoryStorage(); //Using Memory storage instead of Disk storage
+const upload = multer({ storage });
 
   //Testing User Authentication Tokens
 // router.get('/', authenticateToken, (req, res) => {
@@ -40,7 +32,11 @@ router.post('/',upload.single('file'), async (request, response) => {
       title: request.body.title,
       author: request.body.author || 'Anonymous',
       text: request.body.text,
-      image: request.file ? `images/${request.file.filename}` : null,  // Store file path relative to public/images/
+      image: request.file ? {
+        buffer: request.file.buffer, //Image stored as buffer object and saved to Database
+        originalName: request.file.originalname, //file name
+        mimeType: request.file.mimetype //Type of image uploaded(jpeg, png ...)
+      } : null,
     };
 
     const createdPost = await Userpost.create(newPost);
@@ -87,6 +83,23 @@ router.get('/', async (req, res) => {
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
+  }
+});
+
+//GET image from /posts/{id}
+router.get('/:id/image', async (request, response) => {
+  try {
+    const { id } = request.params;
+    const post = await Userpost.findById(id);
+
+    if (!post || !post.image) {
+      return response.status(404).send({ message: 'Image not found' });
+    }
+    response.set('Content-Type', post.image.mimeType);
+    response.send(post.image.buffer);
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
   }
 });
 
