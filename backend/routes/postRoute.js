@@ -23,9 +23,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
   //Testing User Authentication Tokens
-// router.get('/', authenticateToken, (req, res) => {
-//   //return res.json();
-// })
+router.get('/auth', authenticateToken, (req, res) => {
+  return res.status(200).send(req.userAuth);
+})
 
 // POST route to create a new post
 router.post('/',upload.single('file'), async (request, response) => {

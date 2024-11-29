@@ -14,6 +14,10 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+        refreshTokens: [{
+            type: String,
+            required: false,
+        }]
 
     },
 );

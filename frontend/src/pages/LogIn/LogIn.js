@@ -37,7 +37,6 @@ const LogIn = () => {
         if (response.status === 200){
           const data = await response.json();
           localStorage.setItem('accessToken', data.accessToken);
-          localStorage.setItem('refreshToken', data.accessToken);
           console.log("Login Successful");
           alert("Login Successful");
           navigate('/home');
