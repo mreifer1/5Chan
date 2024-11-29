@@ -1,0 +1,42 @@
+.commentBox {
+    margin-top: 15px;
+    padding: 15px;
+    border: 2px solid #6d28d9; /* Purple border */
+    border-radius: 10px;
+    background-color: #1a1a1a; /* Dark background */
+    color: #e0e0e0; 
+    width: 70%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.commentBox input,.commentBox textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #6d28d9;
+    border-radius: 5px;
+    background-color: #2c2c2c;
+    color: #e0e0e0; 
+    font-size: 0.9rem;
+    font-family: inherit;
+    height: 60px; 
+}
+
+.commentBox input::placeholder,.commentBox textarea::placeholder {
+    color: #a8a8a8;
+}
+
+.commentBox button {
+    background-color: #6d28d9; 
+    color: #ffffff; 
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.commentBox button:hover {
+    background-color: #4c1d95;
+}

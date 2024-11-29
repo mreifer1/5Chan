@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import'./Comment.css';
 
 function PostComment({ postId, comments, addComment }) {
   const [isCommentBoxVisible, setCommentBoxVisible] = useState(false);
@@ -27,7 +28,7 @@ function PostComment({ postId, comments, addComment }) {
       </button>
 
       {isCommentBoxVisible && (
-        <div>
+        <div className="commentBox" >
           <input
             type="text"
             value={author}

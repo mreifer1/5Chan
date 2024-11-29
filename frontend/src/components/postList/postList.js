@@ -1,4 +1,4 @@
-import PostComment from '../../pages/Comment';
+import PostComment from '../../pages/Comment/Comment';
 import './postList.css';
 
 
