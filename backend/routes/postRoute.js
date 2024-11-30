@@ -52,7 +52,6 @@ router.post('/:postId/comment', async (request, response) => {
         message: 'Send all required fields: text',
       });
     }
-
     const post = await Userpost.findById(postId);
     if (!post) {
       return response.status(404).send({ message: 'Post not found' });
@@ -66,6 +65,29 @@ router.post('/:postId/comment', async (request, response) => {
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
+  }
+});
+
+router.delete('/:postId/comment/:commentId', async (request, response) => {
+  try {
+    const { postId, commentId } = request.params;
+    const post = await Userpost.findById(postId);
+
+    if (!post) {
+      return response.status(404).json({ message: 'Comment not found' });
+    }
+    const commentIndex = post.comments.findIndex((comment) => comment._id.toString() === commentId);
+    if (commentIndex === -1) {
+      return response.status(404).json({ message: 'Comment not found' });
+    }
+    
+    post.comments.splice(commentIndex, 1);
+    await post.save();
+
+    return response.status(200).json({ message: 'Comment deleted successfully' });
+  } catch (error) {
+    console.log(error.message);
+    return response.status(500).json({ message: error.message });
   }
 });
 
