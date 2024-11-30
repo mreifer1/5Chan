@@ -16,7 +16,7 @@ function PostList({ posts, onDeletePost, addComment, onDeleteComment, onUpvote, 
               <p>{post.text}</p>
               {post.image && (
                 <img
-                  src={`http://localhost:5555/posts/${post._id}/image`}
+                  src={`${process.env.REACT_APP_BACKEND_BASEURL}/posts/${post._id}/image`}
                   alt={post.image.originalName || '5Chan Post'}
                   style={{ width: '100%', height: 'auto', borderRadius: '8px', marginTop: '10px' }}
                 />

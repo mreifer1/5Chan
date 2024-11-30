@@ -16,7 +16,7 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('http://localhost:5555/posts');
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/posts`);
         if (!response.ok) {
           throw new Error('Failed to fetch posts');
         }
@@ -45,7 +45,7 @@ const Home = () => {
     const newComment = { text, author };
 
     try {
-      const response = await fetch(`http://localhost:5555/posts/${postId}/comment`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/posts/${postId}/comment`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newComment),
@@ -68,7 +68,7 @@ const Home = () => {
     // Delete comment from a post
     const onDeleteComment = async (postId, commentId) => {
       try {
-        const response = await fetch(`http://localhost:5555/posts/${postId}/comment/${commentId}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/posts/${postId}/comment/${commentId}`, {
           method: 'DELETE',
         });
   
@@ -96,7 +96,7 @@ const Home = () => {
   // Upvote post
   const handleUpvote = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5555/posts/${id}/upvote`, { method: 'PATCH' });
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/posts/${id}/upvote`, { method: 'PATCH' });
       if (!response.ok) {
         throw new Error('Failed to upvote');
       }
@@ -110,7 +110,7 @@ const Home = () => {
   // Downvote post
   const handleDownvote = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5555/posts/${id}/downvote`, { method: 'PATCH' });
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/posts/${id}/downvote`, { method: 'PATCH' });
       if (!response.ok) {
         throw new Error('Failed to downvote');
       }
@@ -124,7 +124,7 @@ const Home = () => {
   // Delete post
   const handleDeletePost = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5555/posts/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/posts/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         throw new Error('Failed to delete post');
       }
