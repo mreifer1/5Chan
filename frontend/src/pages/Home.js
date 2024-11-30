@@ -62,6 +62,34 @@ const Home = () => {
     }
   };
 
+    // Delete comment from a post
+    const onDeleteComment = async (postId, commentId) => {
+      try {
+        const response = await fetch(`http://localhost:5555/posts/${postId}/comment/${commentId}`, {
+          method: 'DELETE',
+        });
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to delete comment');
+        }
+
+        setPosts((prevPosts) =>
+          prevPosts.map((post) => {
+            if (post._id === postId) {
+              return {
+                ...post,
+                comments: post.comments.filter((comment) => comment._id !== commentId),
+              };
+            }
+            return post;
+          })
+        );
+      } catch (error) {
+        console.error('Error in deleting comment:', error);
+      }
+    };
+
   // Upvote post
   const handleUpvote = async (id) => {
     try {
@@ -113,8 +141,8 @@ const Home = () => {
 
   const filteredPosts = posts.filter((post) => {
     return (
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.author.toLowerCase().includes(searchQuery.toLowerCase())
+      (post.title && post.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (post.author && post.author.toLowerCase().includes(searchQuery.toLowerCase()))
     );
   });
 
@@ -131,11 +159,12 @@ const Home = () => {
         posts={filteredPosts}
         onDeletePost={handleDeletePost}
         addComment={addComment}
+        onDeleteComment={onDeleteComment}
         onUpvote={handleUpvote}
         onDownvote={handleDownvote}
       />
 
-      <PostFormModal  isOpen={isModalOpen} onClose={handleClosePost} addPost={addPost} />
+      <PostFormModal isOpen={isModalOpen} onClose={handleClosePost} addPost={addPost} />
     </div>
   );
 };

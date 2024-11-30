@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import'./Comment.css';
+import DeleteComment from '../DeleteComment'; // Adjust the import path as needed
 
-function PostComment({ postId, comments, addComment }) {
+function PostComment({ postId, comments, addComment, onDeleteComment }) {
   const [isCommentBoxVisible, setCommentBoxVisible] = useState(false);
   const [text, setCommentText] = useState('');
   const [author, setAuthor] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('postId:', postId); // Add logging to check postId
     if (text.trim()) {
       try {
         await addComment(postId, { text, author });
@@ -28,7 +27,7 @@ function PostComment({ postId, comments, addComment }) {
       </button>
 
       {isCommentBoxVisible && (
-        <div className="commentBox" >
+        <div className="commentBox">
           <input
             type="text"
             value={author}
@@ -49,7 +48,14 @@ function PostComment({ postId, comments, addComment }) {
         <h4>Comments:</h4>
         {comments && comments.length > 0 ? (
           comments.map((comment) => (
-            <p key={comment._id}>{comment.author}: {comment.text}</p>
+            <div key={comment._id}>
+              <p>{comment.author}: {comment.text}</p>
+              <DeleteComment
+                postId={postId}
+                commentId={comment._id}
+                onDeleteComment={onDeleteComment}
+              />
+            </div>
           ))
         ) : (
           <p>No comments yet.</p>
