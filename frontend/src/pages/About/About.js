@@ -1,41 +1,9 @@
 import Navbar from "../../components/Navbar/Navbar";
 import ReportButton from "../../components/ReportButton/ReportButton";
-import React, { useEffect } from 'react'
+import React from 'react'
 import './About.css'
 
 const About = () => {
-    //Testing Refresh Tokens
-  useEffect(() => {
-    const refresh = async () => {
-      const token = localStorage.getItem("accessToken");
-      const data = {
-        "token" : token
-      }
-      if (token != null){
-        try{
-          const response = await fetch('http://localhost:5555/user/token', {
-            method: 'POST',
-            headers: {
-              "Content-Type" : "application/json",
-            },
-            body: JSON.stringify(data)
-          });
-
-          if (response.status === 200){ //Token is refreshed
-            alert("Session Timer Refreshed.");
-          } 
-          else if (response.status === 403){ //Token is expired
-            alert("Logged out due to inactivity");
-          }
-        }
-        catch(error){
-          console.error('Error: ', error);
-        }
-      }
-    }
-    refresh()
-  }, [])
-
   return (
     <div>
         <Navbar />

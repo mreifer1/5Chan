@@ -14,10 +14,10 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        refreshTokens: [{
+        refreshTokenCurrent: {
             type: String,
             required: false,
-        }]
+        }
 
     },
 );

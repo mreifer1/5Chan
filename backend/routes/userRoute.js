@@ -61,7 +61,7 @@ router.post('/login', async (request, response) => {
             const refreshToken = jwt.sign(userAuth, process.env.REFRESH_TOKEN_SECRET);
             await user.updateOne( //Adds Refresh Token to user schema
                 {username : reqUser},
-                {$push: {refreshTokens : refreshToken}}
+                {$set: {refreshTokenCurrent : refreshToken}}
             );
 
                 //Testing
@@ -81,7 +81,7 @@ router.post('/login', async (request, response) => {
         console.log(error.message);
         response.status(500).send({message: error.message});
     }
-})
+});
 
     //Create Access Token
 function generateAccessToken(userAuth){
@@ -106,29 +106,32 @@ export function authenticateToken(req, res, next){
     })
 }
 
-    //Create new refresh token
-router.post('/token', async (req, res) => {
-    const refreshToken = req.body.token;
-    if (refreshToken == null) return res.status(401).send("No Token");
+    //Checks refresh token
+router.post('/token', authenticateToken, async (req, res) => {
     
-    // const searchedUser = await user.findOne({username : userAuth});
-    console.log("Requested User Token: " + refreshToken); //Test
+    // Check the accessToken that was sent and verify it.
+    // If correct, find the refreshToken associated with current user and
+    // verify that. If that is correct, then create a new accessToken and
+    // send it back.
 
-    // if (!searchedUser.refreshTokens.includes(refreshToken)){
-    //     return res.status(403).send("Invalid Token");
-    // }
+    const currentUser = await user.findOne({username : req.userAuth.name});
+    console.log("This is the current user: " + currentUser);
+
+    const refreshToken = currentUser.refreshTokenCurrent;
     
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, userAuth) => {
-        if (err) return res.status(403).send("Invalid Token")
-        const accessToken = generateAccessToken({name : userAuth.name});
-        await user.updateOne( //Adds Refresh Token to user schema
-            {username : reqUser},
-            {$push: {refreshTokens : refreshToken}}
-        );
+        if (err) return res.status(403).send("Token Expired")
+        const accessToken = generateAccessToken({name : req.userAuth.name});
+        
         console.log("New access token: " + accessToken);
-        res.json({ accessToken: accessToken});
+        res.status(200).json({ accessToken: accessToken});
     })
-})
+});
+
+    //Delete Tokens and Log Out
+router.delete('/logout', authenticateToken, (req, res) => {
+    
+});
 
 // deleting a user
 router.delete('/:id', async(request, response) => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Auth from '../components/Authentication/Authorization';
 import Navbar from '../components/Navbar/Navbar';
 import SearchBar from '../components/SearchBar/SearchBar';
 import PostList from '../components/postList/postList';
@@ -8,38 +9,6 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    const auth = async () => {
-      //Confirm Login Status (Test)
-      const token = localStorage.getItem("accessToken");
-      if (token != null){
-        try{
-          const response = await fetch('http://localhost:5555/posts/auth', {
-            method: 'GET',
-            headers: {
-              "Content-Type" : "application/json",
-              "Authorization": `Bearer ${token}`,
-            }
-          });
-
-          if (response.status === 200){ //Token is still valid
-            const data = await response.json();
-            console.log(`Token: ${data}`);
-            alert(`Still Logged in as: ${data.name}`);
-          } 
-          else if (response.status === 403){ //Token is expired
-            alert("Logged out due to inactivity");
-          }
-        }catch(error){
-          console.error('Error: ', error);
-        }
-      }
-    };
-
-    auth();
-  }, [])
-
 
   // Fetch posts on load
   useEffect(() => {
@@ -152,6 +121,7 @@ const Home = () => {
 
   return (
     <div>
+      <Auth></Auth>
       <Navbar onCreatePost={handleCreatePost} />
       <div className="pageText">
         <h2 className="homepage">Home Page</h2>
