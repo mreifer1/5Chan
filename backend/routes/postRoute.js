@@ -1,17 +1,11 @@
 import express from 'express';
 import multer from 'multer';
 import { Userpost } from '../models/postModel.js';
-import { authenticateToken } from '../routes/userRoute.js'
 
 const router = express.Router();
 
 const storage = multer.memoryStorage(); //Using Memory storage instead of Disk storage
 const upload = multer({ storage });
-
-  //Testing User Authentication Tokens
-router.get('/auth', authenticateToken, (req, res) => {
-  return res.status(200).send(req.userAuth);
-})
 
 // POST route to create a new post
 router.post('/',upload.single('file'), async (request, response) => {

@@ -14,10 +14,6 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        refreshTokenCurrent: {
-            type: String,
-            required: false,
-        }
 
     },
 );

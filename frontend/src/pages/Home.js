@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Auth from '../components/Authorization/Authorization';
 import Navbar from '../components/Navbar/Navbar';
 import SearchBar from '../components/SearchBar/SearchBar';
 import PostList from '../components/postList/postList';
@@ -151,10 +150,10 @@ const Home = () => {
 
   return (
     <div>
-      <Auth></Auth>
       <Navbar onCreatePost={handleCreatePost} />
       <div className="pageText">
         <h2 className="homepage">Home Page</h2>
+        <br></br>
         {auth?.user && (
           <h2>Welcome back, {auth.user}!</h2>
         
