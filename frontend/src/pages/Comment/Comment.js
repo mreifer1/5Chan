@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DeleteComment from '../DeleteComment'; // Adjust the import path as needed
+import './Comment.css'
 
 function PostComment({ postId, comments, addComment, onDeleteComment }) {
   const [isCommentBoxVisible, setCommentBoxVisible] = useState(false);
