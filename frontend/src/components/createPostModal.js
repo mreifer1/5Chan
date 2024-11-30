@@ -54,6 +54,9 @@ function PostFormModal({ isOpen, onClose, addPost }) {
        }
       setTitle('');
       setAuthor('');
+      if (auth?.user) {
+        setAuthor(auth.user);
+      }
       setText('');
       onClose();
     } else {

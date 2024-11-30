@@ -14,7 +14,11 @@ const app = express();
 app.use(express.json());
 
 // middleware for handling cors policy
-app.use(cors()); 
+const corsOptions = {
+    origin: `${process.env.FRONTEND_URL}`,   // only allow for our frontend
+  };
+  
+  app.use(cors(corsOptions));
 
 app.get('/', (request, response) =>{
     console.log(request)
