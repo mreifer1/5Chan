@@ -16,6 +16,7 @@ app.use(express.json());
 // middleware for handling cors policy
 const corsOptions = {
     origin: `${process.env.FRONTEND_URL}`,   // only allow for our frontend
+    credentials: true,
   };
   
   app.use(cors(corsOptions));
