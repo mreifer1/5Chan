@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Auth from '../components/Authentication/Authorization';
+import Auth from '../components/Authorization/Authorization';
 import Navbar from '../components/Navbar/Navbar';
 import SearchBar from '../components/SearchBar/SearchBar';
 import PostList from '../components/postList/postList';

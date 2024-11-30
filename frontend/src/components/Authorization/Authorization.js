@@ -16,7 +16,7 @@ const Authorization = () => {
           });
 
           if (response.status === 200){ //Token is refreshed
-            alert("Session Timer Refreshed.");
+            //alert("Session Timer Refreshed.");
             const data = await response.json();
             localStorage.setItem('accessToken', data.accessToken);
           } 
@@ -48,7 +48,7 @@ const Authorization = () => {
         if (response.status === 200){ //Token is still valid
           const data = await response.json();
           console.log(`Token: ${data}`);
-          alert(`Still Logged in as: ${data.name}`);
+          //alert(`Still Logged in as: ${data.name}`);
         } 
         else if (response.status === 403){ //Token is expired
           alert("Logged out due to inactivity");
