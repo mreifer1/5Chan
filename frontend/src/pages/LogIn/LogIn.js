@@ -1,10 +1,12 @@
 import Navbar from "../../components/Navbar/Navbar";
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../components/Context/AuthProvider';
 import './LogIn.css';
 
 const LogIn = () => {
   const navigate = useNavigate();
+  const { setAuth } = useContext(AuthContext);
 
     const[formData, setFromData] = useState({
       username: '', email: '', password:''
@@ -37,6 +39,11 @@ const LogIn = () => {
         if (response.status === 200){
           const data = await response.json();
           localStorage.setItem('accessToken', data.accessToken);
+          setAuth({
+            user: data.user,
+            email: data.email,
+            _id: data._id,
+          });    
           console.log("Login Successful");
           alert("Login Successful");
           navigate('/home');

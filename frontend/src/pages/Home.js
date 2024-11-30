@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Auth from '../components/Authentication/Authorization';
 import Navbar from '../components/Navbar/Navbar';
 import SearchBar from '../components/SearchBar/SearchBar';
 import PostList from '../components/postList/postList';
 import PostFormModal from '../components/createPostModal';
+import AuthContext from '../components/Context/AuthProvider';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { auth } = useContext(AuthContext); 
 
   // Fetch posts on load
   useEffect(() => {
@@ -153,6 +155,10 @@ const Home = () => {
       <Navbar onCreatePost={handleCreatePost} />
       <div className="pageText">
         <h2 className="homepage">Home Page</h2>
+        {auth?.user && (
+          <h2>Welcome back, {auth.user}!</h2>
+        
+        )} 
       </div>
 
       <SearchBar onSearch={handleSearch} />

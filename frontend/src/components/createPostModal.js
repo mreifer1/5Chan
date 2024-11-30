@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import AuthContext from './Context/AuthProvider';
 
 function PostFormModal({ isOpen, onClose, addPost }) {
   const [title, setTitle] = useState('');
@@ -6,6 +7,13 @@ function PostFormModal({ isOpen, onClose, addPost }) {
   const [text, setText] = useState('');
   const [error, setError] = useState(null);
   const [file, setFile] = useState(null); 
+  const { auth } = useContext(AuthContext); 
+
+  useEffect(() => {
+    if (auth?.user) {
+      setAuthor(auth.user);
+    }
+  }, [auth]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

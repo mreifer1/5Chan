@@ -70,8 +70,12 @@ router.post('/login', async (request, response) => {
 
             return response.status(200).send({
                 message: "Login Sucessful",
-                accessToken: accessToken
+                accessToken: accessToken,
+                user: searchedUser.username,
+                email: searchedUser.email,
+                _id : searchedUser._id
             });
+            
         } else{
             return response.status(400).send({
                 message: 'Username, Password, or Email is invalid',
