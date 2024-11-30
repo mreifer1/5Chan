@@ -30,7 +30,7 @@ function PostFormModal({ isOpen, onClose, addPost }) {
 
       //post to backend and saved in mongo (backend must be running)
        try {
-         const response = await fetch('http://localhost:5555/posts', {
+         const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/posts`, {
            method: 'POST',
            body: formData,
          });

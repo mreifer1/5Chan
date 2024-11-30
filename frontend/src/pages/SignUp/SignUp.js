@@ -27,7 +27,7 @@ const SignUp = () => {
     };
 
     try{
-      await fetch('http://localhost:5555/user', {
+      await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/user`, {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(user)

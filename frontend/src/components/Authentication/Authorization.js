@@ -7,7 +7,7 @@ const Authorization = () => {
       const token = localStorage.getItem("accessToken");
       if (token != null){
         try{
-          const response = await fetch('http://localhost:5555/user/token', {
+          const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/user/token`, {
             method: 'POST',
             headers: {
               "Content-Type" : "application/json",
@@ -37,7 +37,7 @@ const Authorization = () => {
     const token = localStorage.getItem("accessToken");
     if (token != null){
       try{
-        const response = await fetch('http://localhost:5555/posts/auth', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/posts/auth`, {
           method: 'GET',
           headers: {
             "Content-Type" : "application/json",

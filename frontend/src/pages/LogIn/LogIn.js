@@ -30,7 +30,7 @@ const LogIn = () => {
       };
   
       try{
-        const response = await fetch('http://localhost:5555/user/login', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/user/login`, {
           method: 'POST',
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify(user),
