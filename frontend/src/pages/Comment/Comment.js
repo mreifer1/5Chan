@@ -49,7 +49,7 @@ function PostComment({ postId, comments, addComment, onDeleteComment }) {
         <h4>Comments:</h4>
         {comments && comments.length > 0 ? (
           comments.map((comment) => (
-            <div key={comment._id}>
+            <div key={comment._id} className="commentItem">
               <p>{comment.author}: {comment.text}</p>
               <DeleteComment
                 postId={postId}
