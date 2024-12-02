@@ -7,7 +7,7 @@ const DeleteComment = ({ postId, commentId, onDeleteComment }) => {
 
   return (
     <span onClick={handleDeleteComment} className="delete-comment-button" role="button" aria-label="Delete Comment">
-       Delete 🗑️
+      🗑️ Delete 
     </span>
   );
 };
