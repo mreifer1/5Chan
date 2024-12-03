@@ -1,6 +1,6 @@
 import React from 'react';
 import CreatePostButton from '../CreatePostButton'; 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = ({ onCreatePost }) => {
@@ -9,7 +9,7 @@ const Navbar = ({ onCreatePost }) => {
   return (
     <div className="navbar">
       <div className="navbar-logo">
-        <img src={"/smallLogo.png"} alt="5Chan logo" />
+        <Link to="/home"><img src={"/smallLogo.png"} alt="5Chan logo" /></Link>
       <h1 className="navbar-title">5Chan</h1>
       </div>
       <hr className="navbar-divider" />
