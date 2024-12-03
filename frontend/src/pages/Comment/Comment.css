@@ -58,3 +58,11 @@
 .commentBox button:hover {
     background-color: #4c1d95;
 }
+
+.buttonGap {
+    margin-right: 5px;
+}
+
+.bottomGap {
+    margin-bottom: 10px;
+}

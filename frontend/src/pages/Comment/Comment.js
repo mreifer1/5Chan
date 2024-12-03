@@ -23,10 +23,11 @@ function PostComment({ postId, comments, addComment, onDeleteComment }) {
 
   return (
     <div>
-      <button onClick={() => setCommentBoxVisible(!isCommentBoxVisible)}>
-        {isCommentBoxVisible ? 'Cancel' : 'Add Comment'}
-      </button>
-
+      {!isCommentBoxVisible && (
+        <button className="bottomGap" onClick={() => setCommentBoxVisible(true)}>
+          Add Comment
+        </button>
+      )}
       {isCommentBoxVisible && (
         <div className="commentBox">
           <input
@@ -41,7 +42,10 @@ function PostComment({ postId, comments, addComment, onDeleteComment }) {
             placeholder="Enter your comment"
             required
           />
-          <button onClick={handleSubmit}>Submit Comment</button>
+          <div className="bottomGap">
+          <button className="buttonGap" onClick={handleSubmit}>Submit Comment</button>
+          <button onClick={() => setCommentBoxVisible(false)}>Cancel</button>
+          </div>
         </div>
       )}
 
