@@ -74,21 +74,6 @@ router.post('/login', async (request, response) => {
     }
 });
 
-// deleting a user
-router.delete('/:id', async(request, response) => {
-    try{
-        const { id } = request.params;
-        const result = await user.findByIdAndDelete(id);
-        if(!result){
-            response.status(404).json({ message: 'user not found'});
-        }
-        return response.status(200).send({ message: 'user deleted successfully' })
-    } catch (error){
-        console.log(error.message);
-        response.status(500).send({message: error.message});
-    }
-}); 
-
 // creates report in data base
 router.post('/report', async (request, response) => {
     try{
