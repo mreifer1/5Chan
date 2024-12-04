@@ -9,7 +9,7 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { auth } = useContext(AuthContext); 
+  const { auth, setAuth } = useContext(AuthContext); 
 
   // Fetch posts on load
   useEffect(() => {
@@ -133,6 +133,41 @@ const Home = () => {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    if (!auth?._id) {
+      alert('No user ID found.');
+      return;
+    }
+  
+    const confirmDelete = window.confirm(
+      'Are you sure you want to delete your account? This action cannot be undone.'
+    );
+  
+    if (!confirmDelete) return;
+  
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/user/${auth._id}/delete`, { method: 'DELETE' });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to delete account.');
+      }
+
+      const data = await response.json();
+      alert(data.message);
+  
+      setAuth({
+        user: null,
+        email: null,
+        _id: null,
+      });
+  
+    } catch (error) {
+      console.error('Error deleting account:', error.message); 
+      alert('Failed to delete account. Please try again later.');
+    }
+  };  
+
   const handleCreatePost = () => {
     setIsModalOpen(true);
   };
@@ -155,7 +190,13 @@ const Home = () => {
         <h2 className="homepage">Home Page</h2>
         <br></br>
         {auth?.user && (
-          <h2>Welcome back, {auth.user}!</h2>
+          <div>
+          <h1>Welcome back, {auth.user}!</h1>
+          <br></br>
+          <h4>If you want to delete your account: </h4>
+          <br></br>
+          <button onClick={handleDeleteAccount}>Delete Account</button>
+          </div>
         
         )} 
       </div>

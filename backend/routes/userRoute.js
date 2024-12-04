@@ -113,5 +113,26 @@ router.post('/report', async (request, response) => {
     }
 } );
 
+// delete user from database
+router.delete('/:id/delete', async (req, res) => {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ message: 'User ID required' });
+    }
+  
+    try {
+      const User = await user.findOne({ _id: id }).exec();
+      if (!user) {
+        return res.status(404).json({ message: `User ID ${id} not found` });
+      }
+  
+      const result = await User.deleteOne();
+      res.json({ message: `User ID ${User.username} deleted`, result });
+    } catch (err) {
+      console.error('Error deleting user:', err);
+      res.status(500).json({ message: 'An error occurred while deleting the user.' });
+    }
+  });
+
 
 export default router;
