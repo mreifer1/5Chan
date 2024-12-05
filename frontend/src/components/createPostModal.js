@@ -50,7 +50,7 @@ function PostFormModal({ isOpen, onClose, addPost }) {
          onClose();
        } catch (error) {
          console.error('Error: ', error);
-         alert(error); 
+         alert(errorData); 
          setError(error.message);
        }
       setTitle('');
