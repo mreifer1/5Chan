@@ -10,16 +10,16 @@ dotenv.config();
 
 const app = express();
 
-// parses requests body
-app.use(express.json());
-
 // middleware for handling cors policy
 const corsOptions = {
     origin: `${process.env.FRONTEND_URL}`,   // only allow for our frontend
     credentials: true,
   };
   
-  app.use(cors(corsOptions));
+app.use(cors(corsOptions));
+
+// parses requests body
+app.use(express.json());
 
 app.get('/', (request, response) =>{
     console.log(request)
