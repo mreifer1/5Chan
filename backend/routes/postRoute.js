@@ -30,11 +30,9 @@ router.post('/',upload.single('file'), async (request, response) => {
     const createdPost = await Userpost.create(newPost);
     return response.status(201).send(createdPost);
   } catch (error) {
-    if (error instanceof multer.MulterError && error.code === 'LIMIT_FILE_SIZE') {
-      return response.status(413).send({ message: 'File size is too large. Please upload a smaller file.' });
-    }
-
-    response.status(500).send({ message: error.message });
+    console.log(error.message);
+    var FileError = "Make sure your file is under 5MB";
+    response.status(500).send({ message: error.message+ ", "+FileError});
   }
 });
 
