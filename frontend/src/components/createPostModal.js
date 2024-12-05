@@ -37,6 +37,7 @@ function PostFormModal({ isOpen, onClose, addPost }) {
 
          if (!response.ok) {
            const errorData = await response.json();
+           alert(errorData); 
            throw new Error(errorData.message || 'Failed to create post');
          }
 
@@ -50,7 +51,6 @@ function PostFormModal({ isOpen, onClose, addPost }) {
          onClose();
        } catch (error) {
          console.error('Error: ', error);
-         alert(errorData); 
          setError(error.message);
        }
       setTitle('');
