@@ -31,6 +31,9 @@ function PostFormModal({ isOpen, onClose, addPost }) {
       formData.append('author', author || 'Anonymous'); 
       formData.append('text', text);        
 
+    if (file) {
+      formData.append('file', file);
+    }
 
       //post to backend and saved in mongo (backend must be running)
        try {
