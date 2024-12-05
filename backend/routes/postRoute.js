@@ -31,8 +31,7 @@ router.post('/',upload.single('file'), async (request, response) => {
     return response.status(201).send(createdPost);
   } catch (error) {
     console.log(error.message);
-    var FileError = "Make sure your file is under 5MB";
-    response.status(500).send({ message: error.message+ ", "+FileError});
+    response.status(500).send({ message: error.message });
   }
 });
 

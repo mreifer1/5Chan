@@ -19,6 +19,13 @@ function PostFormModal({ isOpen, onClose, addPost }) {
     e.preventDefault();
     
     if (title.trim() && text.trim()) {
+
+      if (file && file.size > 3 * 1024 * 1024) {
+        setError('File size must be under 3 MB');
+        alert('File size must be under 3 MB');  
+        return;
+      }
+
       const formData = new FormData(); 
       formData.append('title', title);      
       formData.append('author', author || 'Anonymous'); 
@@ -37,7 +44,6 @@ function PostFormModal({ isOpen, onClose, addPost }) {
 
          if (!response.ok) {
            const errorData = await response.json();
-           alert(errorData); 
            throw new Error(errorData.message || 'Failed to create post');
          }
 
