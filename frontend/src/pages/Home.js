@@ -12,6 +12,17 @@ const Home = () => {
   const { auth, setAuth } = useContext(AuthContext); 
 
   useEffect(() => {
+    if (auth?.user) { 
+      localStorage.setItem('LOGGED_IN_USER', JSON.stringify({
+        user: auth.user,
+        email: auth.email,
+        _id: auth._id,
+      }));
+    }
+  }, [auth]);
+
+
+  useEffect(() => {
     const data = localStorage.getItem('LOGGED_IN_USER');
     if (data) {
       setAuth(JSON.parse(data));
@@ -23,16 +34,6 @@ const Home = () => {
       }); 
     }
   }, [setAuth]);
-
-  useEffect(() => {
-    if (auth?.user) { 
-      localStorage.setItem('LOGGED_IN_USER', JSON.stringify({
-        user: auth.user,
-        email: auth.email,
-        _id: auth._id,
-      }));
-    }
-  }, [auth]);
 
   // Fetch posts on load
   useEffect(() => {
