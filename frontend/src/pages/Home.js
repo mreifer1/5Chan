@@ -11,6 +11,29 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { auth, setAuth } = useContext(AuthContext); 
 
+  useEffect(() => {
+    const data = localStorage.getItem('LOGGED_IN_USER');
+    if (data) {
+      setAuth(JSON.parse(data));
+    } else {
+      setAuth({
+        user: null,
+        email: null,
+        _id: null,
+      }); 
+    }
+  }, [setAuth]);
+
+  useEffect(() => {
+    if (auth?.user) { 
+      localStorage.setItem('LOGGED_IN_USER', JSON.stringify({
+        user: auth.user,
+        email: auth.email,
+        _id: auth._id,
+      }));
+    }
+  }, [auth]);
+
   // Fetch posts on load
   useEffect(() => {
     const fetchPosts = async () => {
@@ -161,12 +184,24 @@ const Home = () => {
         email: null,
         _id: null,
       });
+
+      localStorage.removeItem('LOGGED_IN_USER');
   
     } catch (error) {
       console.error('Error deleting account:', error.message); 
       alert('Failed to delete account. Please try again later.');
     }
   };  
+
+  const handleLogOut = () => {
+    setAuth({
+      user: null,
+      email: null,
+      _id: null,
+    });
+
+    localStorage.removeItem('LOGGED_IN_USER');
+  }
 
   const handleCreatePost = () => {
     setIsModalOpen(true);
@@ -195,6 +230,7 @@ const Home = () => {
           <br></br>
           <h4>If you want to delete your account: </h4>
           <br></br>
+          <button onClick={handleLogOut} style={{marginRight: '10px'}}>Log Out</button>
           <button onClick={handleDeleteAccount}>Delete Account</button>
           </div>
         

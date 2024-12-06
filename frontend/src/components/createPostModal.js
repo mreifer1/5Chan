@@ -12,6 +12,8 @@ function PostFormModal({ isOpen, onClose, addPost }) {
   useEffect(() => {
     if (auth?.user) {
       setAuthor(auth.user);
+    } else {
+      setAuthor(''); 
     }
   }, [auth]);
 

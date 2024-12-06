@@ -38,7 +38,6 @@ const LogIn = () => {
 
         if (response.status === 200){
           const data = await response.json();
-          localStorage.setItem('accessToken', data.accessToken);
           setAuth({
             user: data.user,
             email: data.email,
