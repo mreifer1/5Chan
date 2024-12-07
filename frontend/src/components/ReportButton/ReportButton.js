@@ -10,7 +10,7 @@ const Report = () => {
     e.preventDefault();
 
     if (!report_text.trim()) { // gives error if nothing is entered when submitting
-      alert('Please enter a comment before submitting.');
+      alert('Please enter report text');
       return; }
 
     try {
@@ -56,10 +56,10 @@ const Report = () => {
         <textarea
           value={report_text}
           onChange={(e) => setReportText(e.target.value)}
-          placeholder="Enter your comment" 
+          placeholder="Enter your report" 
           required 
         />
-        <button onClick={handleSubmit}>Submit Comment</button>
+        <button onClick={handleSubmit}>Submit Report</button>
       </div>
     </div>
   );

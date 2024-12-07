@@ -49,6 +49,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 20px; /* Added spacing between the button and text box */
   }
   
   .SignUpPage button:hover {
