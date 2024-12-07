@@ -9,16 +9,22 @@ const router = express.Router();
 
 // creates user in data base
 router.post('/', async (request, response) => {
+    const { username, email, password } = request.body;
     try{
-        if(
-            !request.body.email ||
-            !request.body.password ||
-            !request.body.username
-        ){
-          return response.status(400).send({
-            message: 'Send all required fields: email, password, username',
-          });  
-        }
+            const existingUserByUsername = await user.findOne({ username });
+            if (existingUserByUsername) {
+              return response.status(400).json({ message: "Username is already taken." });
+            }
+        
+            
+            const existingUserByEmail = await user.findOne({ email });
+            if (existingUserByEmail) {
+              return response.status(400).json({ message: "Email is already registered." });
+            }
+    
+            if (password.length < 6) {
+              return response.status(400).json({ message: "Password must be at least 6 characters long." });
+            }
 
         //Encrypt Password
         const hashedPassword = await bcrypt.hash(request.body.password, 10);
@@ -29,20 +35,13 @@ router.post('/', async (request, response) => {
             password: hashedPassword,
         };
 
-        const ExistingUser = user.findOne({username: newUser.username});
-
-        if(ExistingUser){
-            console.log("Username is already taken");
-            response.status(400).send({message: "User name is already taken"});
-        }
-
         const User = await user.create(newUser);
-        return response.status(201).send(User); 
+        return response.status(201).json({message: "User created successfully"+ ", "+User.username}); 
     } catch (error){
         console.log(error.message);
         response.status(500).send({message: error.message});
     }
-} );
+});
 
 // Log In
 router.post('/login', async (request, response) => {

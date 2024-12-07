@@ -35,12 +35,14 @@ const SignUp = () => {
 
       if(!response.ok){
         const errorData = await response.json();
-        alert(errorData);
+        console.log(errorData);
+        alert(errorData.message || "An error occured");
+      }else {
+        console.log('new user added')
+        alert('Account created. (Being Redirected to Login)')
+        navigate('/login');
       }
 
-      console.log('new user added')
-      alert('Account created. (Being Redirected to Login)')
-      navigate('/login');
     } catch(error) {
       console.error('Error: ', error);
       setError(error.message);
