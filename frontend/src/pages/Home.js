@@ -223,7 +223,6 @@ const Home = () => {
     <div>
       <Navbar onCreatePost={handleCreatePost} />
       <div className="pageText">
-        <h2 className="homepage">Home Page</h2>
         <br></br>
         {auth?.user && (
           <div>

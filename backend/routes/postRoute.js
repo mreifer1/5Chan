@@ -88,7 +88,7 @@ router.delete('/:postId/comment/:commentId', async (request, response) => {
 // GET posts
 router.get('/', async (req, res) => {
   try {
-    const posts = await Userpost.find();
+    const posts = await Userpost.find().sort({createdAt:-1}); // Sort by creation time, newest first
     return res.status(200).send(posts);
   } catch (error) {
     console.log(error.message);

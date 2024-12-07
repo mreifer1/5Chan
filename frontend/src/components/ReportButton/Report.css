@@ -22,7 +22,8 @@
     top: 88px; 
     left: 75%;  
     transform: translateX(-50%); 
-    background-color: white; 
+    background-color: #1a1a1a; /* Dark background */
+    color: #e0e0e0;           /* Light grey text color */
     border-radius: 12px; 
     padding: 20px;
     width: 300px;
@@ -31,6 +32,7 @@
     opacity: 0;  
     pointer-events: none;  
     transition: opacity 0.3s ease, transform 0.3s ease;
+    border: 1px solid #6d28d9;  /* Purple border */
   }
   
   .report_form.show {
@@ -42,7 +44,7 @@
   .report_form h2 {
     margin-top: 0;
     font-size: 20px;
-    color: #333;
+    color: #e0e0e0; /* Light grey heading color */
   }
   
   .report_form input,
@@ -50,7 +52,9 @@
     width: 100%; 
     padding: 12px;
     margin-bottom: 15px; 
-    border: 1px solid #ccc;
+    background-color: #2c2c2c;  /* Dark input background */
+    border: 1px solid #6d28d9;  /* Purple border */
+    color: white;           
     border-radius: 6px; 
     font-size: 14px;
     transition: border-color 0.3s ease;
@@ -77,6 +81,6 @@
   }
   
   .report_form button:hover {
-    background-color: #5b21b6; 
+    background-color: #4c1d95; /* Darker purple on hover */
   }
   

@@ -39,6 +39,14 @@
     margin: 0;
     margin: 0; 
   }
+
+  .navbar-buttons button:hover {
+    background-color: #5b21b6;
+    transform: translateY(-5px); /* Lift on hover */
+    box-shadow: 0 4px 15px rgba(91, 33, 182, 0.7); /* Stronger shadow on hover */
+    transition: transform 0.3s;
+  }
+  
   
   .navbar-divider {
     border: none; 

@@ -9,6 +9,10 @@ const Report = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!report_text.trim()) { // gives error if nothing is entered when submitting
+      alert('Please enter a comment before submitting.');
+      return; }
+
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/user/report`, {
         method: "POST",
