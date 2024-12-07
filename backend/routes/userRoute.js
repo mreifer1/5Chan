@@ -29,6 +29,13 @@ router.post('/', async (request, response) => {
             password: hashedPassword,
         };
 
+        const ExistingUser = user.findOne({username: newUser.username});
+
+        if(ExistingUser){
+            console.log("Username is already taken");
+            response.status(400).send({message: "User name is already taken"});
+        }
+
         const User = await user.create(newUser);
         return response.status(201).send(User); 
     } catch (error){

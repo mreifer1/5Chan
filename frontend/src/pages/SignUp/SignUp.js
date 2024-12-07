@@ -27,15 +27,20 @@ const SignUp = () => {
     };
 
     try{
-      await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/user`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/user`, {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(user)
-      }).then(() => {
-        console.log('new user added')
-        alert('Account created. (Being Redirected to Login)')
-        navigate('/login');
-      })
+      });
+
+      if(!response.ok){
+        const errorData = await response.json();
+        alert(errorData);
+      }
+
+      console.log('new user added')
+      alert('Account created. (Being Redirected to Login)')
+      navigate('/login');
     } catch(error) {
       console.error('Error: ', error);
       setError(error.message);
